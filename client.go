@@ -953,7 +953,7 @@ func (msg *reqMsg) read(bytes []byte) (bool, []byte) {
 	}
 	switch msg.atyp {
 	case 1: // ipv4
-    if (msg.dst_addr[0] == 10 || (msg.dst_addr[0] == 192 && msg.dst_addr[1] == 168))
+    if (int(msg.dst_addr[0]) == 10 || (int(msg.dst_addr[0]) == 192 && int(msg.dst_addr[1]) == 168))
     {
         return false,buf
     }
