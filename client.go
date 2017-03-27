@@ -953,6 +953,10 @@ func (msg *reqMsg) read(bytes []byte) (bool, []byte) {
 	}
 	switch msg.atyp {
 	case 1: // ipv4
+    if (msg.dst_addr[0] == 10 || (msg.dst_addr[0] == 192 && msg.dst_addr[1] == 168))
+    {
+        return false,buf
+    }
 		msg.url = fmt.Sprintf("%d.%d.%d.%d:%d", msg.dst_addr[0], msg.dst_addr[1], msg.dst_addr[2], msg.dst_addr[3], msg.dst_port2)
 	case 3: //DOMANNAME
 		msg.url = net.JoinHostPort(string(msg.dst_addr[1:1+msg.dst_addr[0]]), fmt.Sprintf("%d", msg.dst_port2))
